@@ -1,0 +1,193 @@
+﻿@page "/"
+@using ChatGPTClone.Components.UI
+@inject OpenAIService openAiService
+
+<PageTitle>Home</PageTitle>
+
+<div class="flex h-full overflow-hidden home-header">
+    <div class="hidden flex-shrink-0 absolute md:relative md:flex h-full w-3/4 md:w-64 -translate-x-full md:translate-x-0 flex-col justify-between duration-700 ease-in-out overflow-y-auto no-scrollbar border-e bg-white offcanvas" style="z-index:1;">
+        <div class="flex gap-2 absolute md:relative top-0 bg-white border-b py-2 px-4 w-full">
+            <span class="grid h-10 w-full place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
+                <p class="flex justify-center items-center gap-2">
+                    <span>
+                        <?xml version="1.0" ?>
+                        <svg viewBox="0 0 448 512" class="h-5 w-6" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M384 32H64C28.65 32 0 60.66 0 96v320c0 35.34 28.65 64 64 64h320c35.35 0 64-28.66 64-64V96C448 60.66 419.3 32 384 32zM319.1 280h-72V352c0 13.2-10.8 24-23.1 24c-13.2 0-24-10.8-24-24V280H127.1C114.8 280 103.1 269.2 103.1 256c0-13.2 10.8-24 24-24h71.1V160c0-13.2 10.8-24 24-24c13.2 0 23.1 10.8 23.1 24v72h72c13.2 0 23.1 10.8 23.1 24C343.1 269.2 333.2 280 319.1 280z" />
+                        </svg>
+                    </span>
+                    New Chat
+                </p>
+            </span>
+            <button class="md:hidden menuCloseBtn rounded-lg bg-gray-100 text-gray-600 p-1">
+                <?xml version="1.0" ?>
+                <svg viewBox="0 0 32 32" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <style>
+                            .cls-1 {
+                                fill: none;
+                                stroke: #000;
+                                stroke-linecap: round;
+                                stroke-linejoin: round;
+                                stroke-width: 2px;
+                            }</style>
+                    </defs>
+                    <title />
+                    <g id="cross"><line class="cls-1" x1="7" x2="25" y1="7" y2="25" /><line class="cls-1" x1="7" x2="25" y1="25" y2="7" /></g>
+                </svg>
+            </button>
+        </div>
+        <div class="px-4 py-4 flex-grow">
+            <h3 class="block my-2 px-4 text-sm font-medium text-gray-700 border-b">All chats</h3>
+            <div class="overflow-hidden">
+                <div class="flex flex-col gap-1 overflow-y-scroll no-scrollbar">
+                    @foreach (var chat in Messages)
+                    {
+                        if(chat.IsUser){
+                        <a href="" class="block rounded-lg bg-gray-100 px-4 py-2 font-medium text-gray-700 text-nowrap overflow-ellipsis">
+                            @chat.content
+                        </a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="absolute md:sticky inset-x-0 bottom-0 border-t border-gray-100 w-full">
+            <div href="#" class="flex items-center gap-2 bg-white p-4">
+                <img alt="Man"
+                     src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                     class="h-6 md:h-10 w-6 md:w-10 rounded-full object-cover" />
+
+                <div>
+                    <p class="text-xs">
+                        <strong class="block font-bold font-medium">Emmanuel Genga</strong>
+
+                        <span> gengaemmanuel97@gmail.com </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex relative flex-grow flex-col h-full bg-gray-100 items-center">
+        <div class="grid grid-cols-3 md:place-items-center p-2 w-full border-b">
+            <button class="md:hidden menuOpenBtn">
+                <?xml version="1.0" ?>
+                <svg enable-background="new 0 0 32 32" class="h-6 w-6" id="Glyph" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M29,16c0,1.104-0.896,2-2,2H11c-1.104,0-2-0.896-2-2s0.896-2,2-2h16C28.104,14,29,14.896,29,16z" id="XMLID_352_" /><path d="M29,6c0,1.104-0.896,2-2,2H11C9.896,8,9,7.104,9,6s0.896-2,2-2h16C28.104,4,29,4.896,29,6z" id="XMLID_354_" /><path d="M29,26c0,1.104-0.896,2-2,2H11c-1.104,0-2-0.896-2-2s0.896-2,2-2h16C28.104,24,29,24.896,29,26z" id="XMLID_356_" /><path d="M3,6c0,1.103,0.897,2,2,2s2-0.897,2-2S6.103,4,5,4S3,4.897,3,6z" id="XMLID_358_" /><path d="M3,16c0,1.103,0.897,2,2,2s2-0.897,2-2s-0.897-2-2-2S3,14.897,3,16z" id="XMLID_360_" /><path d="M3,26c0,1.103,0.897,2,2,2s2-0.897,2-2s-0.897-2-2-2S3,24.897,3,26z" id="XMLID_362_" /></svg>
+            </button>
+            <h3 class="text-center md:col-span-3">GPT</h3>
+        </div>
+        <div class="flex flex-col gap-2 p-4 mb-16 h-full overscroll-none overflow-x-hidden overflow-y-scroll no-scrollbar w-full md:w-[75%] xl:w-[50%]">          
+            @foreach (var chat in Messages)
+            {
+                if(chat.IsUser){
+                    <UserPrompt userPrompt="@chat.content" />
+                }
+                if((_question != chat.content) && !chat.IsUser) 
+{
+                    <GPTResponse Response="@chat.content" />
+                }                               
+            }
+        </div>
+        <div class=" absolute bottom-0 w-full flex flex-col justify-center items-center px-4 md:px-0 xl:px-6">
+            <div class="flex justify-center items-center rounded-lg bg-white border border-gray-400 m-2 w-full md:w-[65%] xl:w-[50%]">
+                <InputTextArea @bind-Value="_question" disabled="@_isSendingMessage" rows="1" type="text" class="w-full p-2 border-0 rounded-bl-lg rounded-tl-lg focus:ring-0 focus:border-transparent focus:outline-none sm:text-sm" placeholder="Type a message"></InputTextArea>
+                <button class="p-2 me-1.5" @onclick="Prompt" disabled="@_isSendingMessage">
+                    @if (_isSendingMessage == true)
+                    {
+                        <!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com -->
+                        <div class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                             role="status">
+                            <span class="!absolute !h-4 !w-4 !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <?xml version="1.0" ?>
+                        <svg viewBox="0 0 448 512" class="h-6 w-6 rotate-45" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M444.4 98.21l-143.1 351.1C292.9 468.5 275.2 480 256 480c-28.84 
+                                0-48.02-23.1-48.02-47.1v-159.1H48c-22.94 0-42.67-16.22-47.09-38.75c-4.437-22.5 7.688-44.1 
+                                28.92-53.69l351.1-143.1c17.86-7.343 38.45-3.188 52.11 10.5C447.6 59.74 451.8 80.3 444.4 98.21z" 
+                            />
+                        </svg>
+                    }
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const menuOpenBtn = document.querySelector('.menuOpenBtn');
+    const offcanvas = document.querySelector('.offcanvas');
+    const menuCloseBtn = document.querySelector('.menuCloseBtn');
+
+    menuOpenBtn.addEventListener('click', () => {
+        if (offcanvas.classList.contains('-translate-x-full')) {
+            offcanvas.classList.remove('-translate-x-full');
+            offcanvas.classList.remove('hidden')
+            offcanvas.classList.add('translate-x-0');
+        }
+    });
+
+    menuCloseBtn.addEventListener("click", () => {
+        console.log(offcanvas.classList.contains('translate-x-0'))
+        if (offcanvas.classList.contains('translate-x-0') ) {
+            offcanvas.classList.add('-translate-x-full');
+            offcanvas.classList.remove('translate-x-0');
+            offcanvas.classList.add('hidden')
+        }
+    });
+
+</script>
+
+
+@code{
+
+    private string _question = string.Empty;
+    private readonly List<Message> _chatHistory = new();
+    public List<Message> Messages => _chatHistory.Where(c=> c.role is not "System").ToList();
+    private bool _isSendingMessage;
+
+    private async Task HandleKeyPress(KeyboardEventArgs key)
+    {
+        if(key.Key is not "Enter") return;
+        await Prompt();
+    }
+
+    private async Task Prompt()
+    {
+        if(string.IsNullOrWhiteSpace(_question)) return;
+        AddUserQuestionToConversation();
+        StateHasChanged();
+        await CreateCompletion();
+        ClearInput();
+        StateHasChanged();
+    }
+
+    private void AddUserQuestionToConversation()
+    {
+        _chatHistory.Add(new Message{role="user", content=_question});
+        StateHasChanged();
+    }
+
+    private async Task CreateCompletion()
+    {
+        _isSendingMessage = true;
+        var assistantResponse =await openAiService.CreateChatCompletion(_chatHistory);
+        _chatHistory.Add(assistantResponse!);
+        _isSendingMessage = false;
+
+    }
+
+    private void ClearInput()
+    {
+        _question = string.Empty;
+    }
+    private void ClearConversation()
+    {
+        _chatHistory.Clear();
+        ClearInput();
+    }
+
+
+}
