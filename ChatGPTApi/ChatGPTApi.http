@@ -1,6 +1,0 @@
-@ChatGPTApi_HostAddress = http://localhost:5229
-
-GET {{ChatGPTApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
